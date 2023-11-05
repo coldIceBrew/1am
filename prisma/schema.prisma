@@ -48,11 +48,12 @@ model Account {
 }
 
 model Podcast {
-  id         Int     @id @default(autoincrement())
-  authorId   Int
-  title      String
-  descrition String? @db.Text
-  category   String?
+  id          Int     @id @default(autoincrement())
+  authorId    Int
+  title       String
+  description String? @db.Text
+  category    String?
+  artwork     String?
 
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
