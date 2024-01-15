@@ -3,16 +3,13 @@ import Link from "next/link";
 import React from "react";
 
 function Logo() {
+  // TODO: 로고 이미지 넣기
   return (
     <Link href={"/"}>
-      <Image
-        priority
-        src={"/logo.svg"}
-        alt={"Main Logo"}
-        width={300}
-        height={100}
-        className="dark:filter dark:invert"
-      />
+      <div className="flex items-end">
+        <span className="text-4xl font-bold mr-1">1AM</span>
+        <span>아이앰</span>
+      </div>
     </Link>
   );
 }

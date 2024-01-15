@@ -1,10 +1,5 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import type {
-  GetServerSidePropsContext,
-  NextApiRequest,
-  NextApiResponse,
-} from "next";
-import { NextAuthOptions, Session, getServerSession } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import Google from "next-auth/providers/google";
 import prisma from "./prisma";
 
@@ -19,15 +14,13 @@ export const authOptions = {
   callbacks: {
     session: async ({ session, token }) => {
       if (session?.user) {
-        if (token.sub) {
-          session.user.id = token.sub;
-        }
+        session.user.id = token.uid;
       }
       return session;
     },
     jwt: async ({ token, user }) => {
       if (user) {
-        token.sub = user.id;
+        token.uid = user.id;
       }
       return token;
     },

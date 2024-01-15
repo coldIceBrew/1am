@@ -1,35 +1,30 @@
-import PodcastCreateButton from "@/components/PodcastCreateButton";
-import { Button } from "@/components/ui/button";
-import { authOptions } from "@/lib/auth";
-import prisma from "@/lib/prisma";
-import { PlusIcon } from "@heroicons/react/24/solid";
-import { getServers } from "dns";
-import { getServerSession } from "next-auth";
+"use client";
+
+import { Podcast } from "@prisma/client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Podcasts() {
-  const session = await getServerSession(authOptions);
+export default function Podcasts() {
+  const [podcasts, setPodcasts] = useState<Podcast[]>([]);
 
-  if (!session) {
-    throw new Error("Unauthorized User");
-  }
-
-  const podcasts = await prisma.podcast.findMany({
-    where: {
-      authorId: Number(session?.user.id),
-    },
-  });
+  useEffect(() => {
+    const fetchPodcasts = async () => {
+      const response = await fetch("/api/podcasts");
+      const fetchedPodcasts = await response.json();
+      setPodcasts(fetchedPodcasts);
+    };
+    fetchPodcasts();
+  }, []);
 
   return (
     <div>
       <div className="flex gap-x-5 items-center mb-8">
         <h1 className="text-xl font-thin">팟캐스트 목록</h1>
-        <PodcastCreateButton />
       </div>
       {podcasts.length > 0 ? (
         podcasts.map((podcast) => (
           <div key={podcast.id}>
-            <Link href={`/podcasts/${podcast.id}/episodes`} prefetch={false}>
+            <Link href={`/podcasts/${podcast.id}`} prefetch={false}>
               {podcast.title}
             </Link>
           </div>

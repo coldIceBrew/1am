@@ -1,32 +1,17 @@
-import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
-export default async function Home() {
-  const session = await getServerSession();
-
-  if (session) {
-    redirect("/podcasts");
-  }
-
+export default function Home() {
   return (
-    <div className="h-screen">
-      <div className="absolute top-5 right-5">
-        <div className="divide-x-2">
-          <Link href={"/api/auth/signin"} className="px-3">
-            로그인
-          </Link>
-        </div>
-      </div>
-      <div className="flex justify-center items-center h-full mx-5">
-        <Image
-          src={"./logo.svg"}
-          alt={"Main Logo"}
-          width={1200}
-          height={1000}
-        />
-      </div>
+    <div className="flex min-h-screen items-center justify-center">
+      <Link href={"/podcasts"} className="px-3">
+        팟캐스트
+      </Link>
+      <Link href={"/api/auth/signin"} className="px-3">
+        로그인
+      </Link>
+      <Link href={"/api/auth/signout"} className="px-3">
+        로그아웃
+      </Link>
     </div>
   );
 }

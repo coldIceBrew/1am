@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 import { Button } from "./ui/button";
 
-function DarkModeToggle() {
+function ModeToggle() {
   const { setTheme } = useTheme();
 
   return (
@@ -37,4 +37,4 @@ function DarkModeToggle() {
   );
 }
 
-export default DarkModeToggle;
+export default ModeToggle;
