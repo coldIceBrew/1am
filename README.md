@@ -41,4 +41,4 @@ npm run dev
 
 ## License
 
-[MIT license](https://github.com/sukjuhong/1am/main/LICENSE.md).
+[MIT license](https://github.com/sukjuhong/1am/main/LICENSE.md)
