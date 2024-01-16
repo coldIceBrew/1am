@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 1am
 
-## Getting Started
+## About this project
 
-First, run the development server:
+쉽고 간단한 팟캐스트 호스팅 플랫폼.
+
+> [!WARNING]
+> 해당 프로젝트는 현재 제작 중입니다. 프로젝트는 공개한 상태로 제작될 예정이지만 언제든 private으로 전환될 수 있습니다.
+
+## Features
+
+1인 개발 중이기 때문에 핫한 next.js로 제작중입니다.
+
+- Written in <Strong>Typescript</Strong>
+- Using <Strong>App Router</Strong> (/app)
+- Not using Server Action, just <Strong>Route Handlers</Strong> (/app/api)
+- Authentication using <strong>NextAuth.js</strong>
+- ORM using <strong>Prisma</strong>
+- Styled using <strong>Tailwind CSS</strong>
+- Using designed components belong to <strong>shadcn/ui</strong>
+
+## Running Locally
+
+1. 의존 패키지 설치하기
+
+```bash
+npm install
+```
+
+2. 제대로 동작하기 위해선 `.env`가 필요합니다. `.env.example`을 복사한뒤 값을 수정하시길 바랍니다.
+
+```bash
+cp .env.example .env
+```
+
+3. development server 실행하기
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[MIT license](https://github.com/sukjuhong/1am/main/LICENSE.md).
