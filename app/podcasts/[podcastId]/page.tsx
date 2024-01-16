@@ -13,9 +13,9 @@ export default function PodcastsInfo() {
   }
 
   return (
-    <main className="container max-w-6xl pt-[40px] pb-[50px]">
+    <div className="container max-w-6xl pt-[40px] pb-[50px]">
       <h1 className="text-2xl font-thin mb-10 border-b">마이페이지</h1>
       <PodcastForm podcast={podcast} />
-    </main>
+    </div>
   );
 }

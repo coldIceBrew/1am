@@ -16,6 +16,8 @@ export default function PodcastWithIdLayout({
   const { podcastId } = params;
   const setPodcast = useSetRecoilState(currentPodcastState);
 
+  // TODO: check user have access to this podcast
+
   useEffect(() => {
     const fetchPodcast = async () => {
       const response = await fetch(`/api/podcasts/${podcastId}`);

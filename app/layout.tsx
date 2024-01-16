@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import RecoilRootProvider from "@/components/RecoilRootProvider";
 import localFont from "next/font/local";
+import { Toaster } from "@/components/ui/toaster";
 
 const pretendardFont = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -20,19 +21,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body
-        className={`min-h-screen bg-background antialiased ${pretendardFont.className}`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <RecoilRootProvider>
+      <html lang="ko">
+        <body
+          className={`min-h-screen bg-background antialiased ${pretendardFont.className}`}
         >
-          <RecoilRootProvider>{children}</RecoilRootProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main>{children}</main>
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </RecoilRootProvider>
   );
 }

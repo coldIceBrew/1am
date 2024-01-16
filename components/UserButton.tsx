@@ -35,7 +35,7 @@ export default function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="flex gap-x-3 rounded-lg border border-gray-300 overflow-hidden">
+        <div className="flex gap-x-3 rounded-lg border overflow-hidden dark:border-white]">
           <Image
             src={podcast.artwork || ""}
             alt="user avatar"
@@ -43,7 +43,9 @@ export default function UserButton() {
             height={54}
           />
           <div className="flex-1 flex justify-center items-start flex-col mr-5 min-w-[150px]">
-            <p className="text-sm text-gray-500">{podcast.title}</p>
+            <p className="text-sm text-gray-500 dark:text-white">
+              {podcast.title}
+            </p>
             <p className="text-xs text-gray-400">피드 링크</p>
           </div>
         </div>

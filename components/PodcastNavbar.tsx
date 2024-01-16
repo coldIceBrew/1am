@@ -55,13 +55,12 @@ function PodcastNavbarItem({
 }
 
 export default function PodcastNavbar({ id: podcastId }: { id: string }) {
-  // QUESTION: 왼쪽에 네비게이션 바가 붙어있어야 하는지?
-  // TODO: href 만들기
+  // TODO: when dark mode
   const basePath = `/podcasts/${podcastId}`;
   const pathname = usePathname();
 
   return (
-    <nav className="bg-gray-100 rounded-tr-3xl pt-10 px-14 min-h-full">
+    <nav className="bg-gray-100 rounded-tr-3xl pt-10 px-14 min-h-full dark:bg-gray-800">
       {podcastNavbarItemList.map((item) => (
         <PodcastNavbarItem
           key={item.content}
