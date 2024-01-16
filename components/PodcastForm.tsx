@@ -7,7 +7,7 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
   // TODO: 카테고리 추가
   // TODO: 사진 업로드 추가
   return (
-    <form>
+    <form action={`/api/podcasts/${podcast.id}`} method="put">
       <div className="mb-6">
         <p className="text-xl font-medium inline-block mb-2">아트워크</p>
         <div className="flex gap-x-6">
@@ -49,6 +49,7 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
           id="producer"
           className="bg-white border border-gray-300 w-full p-2.5 text-sm"
           placeholder="ex) 빠삐용"
+          value={podcast.producer || ""}
         />
       </div>
 
@@ -116,11 +117,16 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
         >
           연령 제한 컨텐츠
         </label>
-        <Checkbox id="podcast-explicit" className="ml-3" />
+        <Checkbox
+          id="podcast-explicit"
+          className="ml-3"
+          checked={podcast.explicit}
+        />
         <p className="text-sm text-gray-400">
           19세 미만 청소년이 이용하기에 부적절한 컨텐츠 포함
         </p>
       </div>
+      <Button type="submit">저장하기</Button>
     </form>
   );
 }

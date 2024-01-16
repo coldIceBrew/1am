@@ -8,14 +8,14 @@ export default function PodcastsInfo() {
   const podcast = useRecoilValue(currentPodcastState);
 
   if (!podcast) {
-    return null;
+    // TODO: 로딩 화면 만들기
+    return <h1>Loading...</h1>;
   }
 
   return (
-    <div className="container py-5">
+    <main className="container max-w-6xl pt-[40px] pb-[50px]">
       <h1 className="text-2xl font-thin mb-10 border-b">마이페이지</h1>
       <PodcastForm podcast={podcast} />
-      <form></form>
-    </div>
+    </main>
   );
 }

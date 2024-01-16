@@ -15,14 +15,21 @@ import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { currentPodcastState } from "@/lib/atom";
-import { authOptions } from "@/lib/auth";
+import { Skeleton } from "./ui/skeleton";
 
 export default function UserButton() {
-  // TODO: podcast 로딩 구현
   const podcast = useRecoilValue(currentPodcastState);
 
   if (!podcast) {
-    return null;
+    return (
+      <div className="flex items-center space-x-4 rounded-lg">
+        <Skeleton className="h-12 w-12" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[150px]" />
+          <Skeleton className="h-4 w-[150px]" />
+        </div>
+      </div>
+    );
   }
 
   return (
