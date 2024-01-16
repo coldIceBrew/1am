@@ -4,15 +4,7 @@ import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Checkbox } from "./ui/checkbox";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useToast } from "./ui/use-toast";
-
-interface PodcastFormValue {
-  producer: string;
-  title: string;
-  description: string;
-  category: string;
-  subCategory: string;
-  explicit: boolean;
-}
+import { PodcastFormValue } from "@/types";
 
 function PodcastForm({ podcast }: { podcast: Podcast }) {
   // TODO: 카테고리 추가

@@ -32,7 +32,9 @@ export default function PodcastWithIdLayout({
       <PodcastHeader />
       <div className="flex-1 flex">
         <PodcastNavbar id={podcastId} />
-        {children}
+        <div className="container max-w-6xl pt-[40px] pb-[50px]">
+          {children}
+        </div>
       </div>
     </div>
   );
