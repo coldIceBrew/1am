@@ -48,17 +48,36 @@ model Account {
 }
 
 model Podcast {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   authorId    Int
   producer    String
   title       String
-  description String? @db.Text
+  description String?  @db.Text
   category    String?
-  subCategory String? @map("sub_category")
+  subCategory String?  @map("sub_category")
   artwork     String?
-  explicit    Boolean @default(false)
+  explicit    Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author  User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Episode Episode[]
 
   @@map("podcasts")
+}
+
+model Episode {
+  id          Int       @id @default(autoincrement())
+  podcastId   Int       @map("podcast_id")
+  title       String
+  description String?   @db.Text
+  audio       String?
+  explicit    Boolean   @default(false)
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+
+  podcast Podcast @relation(fields: [podcastId], references: [id], onDelete: Cascade)
+
+  @@map("episodes")
 }

@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost", "lh3.googleusercontent.com", "picsum.photos"],
+    domains: [
+      "localhost",
+      "yt3.googleusercontent.com",
+      "picsum.photos",
+      "www.buzzsprout.com",
+    ],
   },
 };
 

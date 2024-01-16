@@ -15,12 +15,12 @@ import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { currentPodcastState } from "@/lib/atom";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../ui/skeleton";
 
-export default function UserButton() {
-  const podcast = useRecoilValue(currentPodcastState);
+export default function PodcastDropdownButton() {
+  const { podcast, state } = useRecoilValue(currentPodcastState);
 
-  if (!podcast) {
+  if (state === "null" || state === "loading") {
     return (
       <div className="flex items-center space-x-4 rounded-lg">
         <Skeleton className="h-12 w-12" />
@@ -37,8 +37,11 @@ export default function UserButton() {
       <DropdownMenuTrigger>
         <div className="flex gap-x-3 rounded-lg border overflow-hidden dark:border-white]">
           <Image
-            src={podcast.artwork || ""}
-            alt="user avatar"
+            src={
+              podcast.artwork ||
+              "https://www.buzzsprout.com/images/artworks_cover.jpg"
+            }
+            alt="podcast artwork"
             width={54}
             height={54}
           />

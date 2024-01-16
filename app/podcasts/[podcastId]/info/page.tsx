@@ -1,15 +1,16 @@
 "use client";
 
-import PodcastForm from "@/components/PodcastForm";
+import Loading from "@/components/Loading";
+import PodcastForm from "@/components/podcasts/PodcastForm";
 import { currentPodcastState } from "@/lib/atom";
 import { useRecoilValue } from "recoil";
 
 export default function PodcastsInfo() {
-  const podcast = useRecoilValue(currentPodcastState);
+  const { podcast, state } = useRecoilValue(currentPodcastState);
 
-  if (!podcast) {
+  if (state === "null" || state === "loading") {
     // TODO: 로딩 화면 만들기
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (

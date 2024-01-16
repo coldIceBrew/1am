@@ -1,15 +1,15 @@
 import { Podcast } from "@prisma/client";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Checkbox } from "./ui/checkbox";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useToast } from "./ui/use-toast";
-import { PodcastFormValue } from "@/types";
+import { Checkbox } from "../ui/checkbox";
+import { useForm } from "react-hook-form";
+import { useToast } from "../ui/use-toast";
+import { IPodcastForm } from "@/types";
 
 function PodcastForm({ podcast }: { podcast: Podcast }) {
   // TODO: 카테고리 추가
   // TODO: 사진 업로드 추가
-  const { register, handleSubmit } = useForm<PodcastFormValue>({
+  const { register, handleSubmit } = useForm<IPodcastForm>({
     defaultValues: {
       producer: podcast.producer,
       title: podcast.title,
@@ -21,7 +21,7 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
   });
   const { toast } = useToast();
 
-  const onSubmit = async (data: PodcastFormValue) => {
+  const onSubmit = async (data: IPodcastForm) => {
     const res = await fetch(`/api/podcasts/${podcast.id}`, {
       method: "PATCH",
       body: JSON.stringify(data),

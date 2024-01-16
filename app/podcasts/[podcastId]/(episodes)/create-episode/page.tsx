@@ -1,19 +1,19 @@
 "use client";
 
-import AudioTab from "@/components/episodes/create/AudioTab";
-import EpisodeTab from "@/components/episodes/create/EpisodeTab";
-import SubmitTab from "@/components/episodes/create/SubmitTab";
-import TabIndicator from "@/components/episodes/create/TabIndicator";
+import AudioTab from "@/components/episodes/AudioTab";
+import EpisodeTab from "@/components/episodes/EpisodeTab";
+import SubmitTab from "@/components/episodes/SubmitTab";
+import TabIndicator from "@/components/episodes/TabIndicator";
 import { Button } from "@/components/ui/button";
-import { PodcastFormValue } from "@/types";
+import { IEpisodeForm } from "@/types";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function CreateEpisode() {
-  const { register, handleSubmit } = useForm<PodcastFormValue>();
+  const { register, handleSubmit } = useForm<IEpisodeForm>();
   const [tabNumber, setTabNumber] = useState(1);
 
-  const onSubmit = (data: PodcastFormValue) => {
+  const onSubmit = (data: IEpisodeForm) => {
     console.log(data);
   };
 

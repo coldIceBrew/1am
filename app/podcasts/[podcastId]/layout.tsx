@@ -1,10 +1,10 @@
 "use client";
 
-import PodcastHeader from "@/components/PodcastHeader";
-import PodcastNavbar from "@/components/PodcastNavbar";
+import PodcastHeader from "@/components/podcasts/PodcastHeader";
+import PodcastNavbar from "@/components/podcasts/PodcastNavbar";
 import { currentPodcastState } from "@/lib/atom";
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 export default function PodcastWithIdLayout({
   children,
@@ -14,18 +14,19 @@ export default function PodcastWithIdLayout({
   params: { podcastId: string };
 }) {
   const { podcastId } = params;
-  const setPodcast = useSetRecoilState(currentPodcastState);
+  const [podcast, setPodcast] = useRecoilState(currentPodcastState);
 
   // TODO: check user have access to this podcast
 
   useEffect(() => {
     const fetchPodcast = async () => {
+      setPodcast({ ...podcast, state: "loading" });
       const response = await fetch(`/api/podcasts/${podcastId}`);
       const fetchedPodcast = await response.json();
-      setPodcast(fetchedPodcast);
+      setPodcast({ podcast: fetchedPodcast, state: "loaded" });
     };
     fetchPodcast();
-  });
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">

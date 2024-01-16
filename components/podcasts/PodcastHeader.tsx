@@ -1,8 +1,8 @@
 "use client";
 
-import ModeToggle from "./ModeToggle";
-import Logo from "./Logo";
-import UserButton from "./UserButton";
+import ModeToggle from "../ModeToggle";
+import Logo from "../Logo";
+import PodcastDropdownButton from "./PodcastDropdownButton";
 
 export default function PodcastHeader() {
   return (
@@ -11,7 +11,7 @@ export default function PodcastHeader() {
       <div className="flex-1"></div>
       <div className="flex items-center gap-x-3">
         <ModeToggle />
-        <UserButton />
+        <PodcastDropdownButton />
       </div>
     </header>
   );

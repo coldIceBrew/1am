@@ -2,23 +2,18 @@
 
 import { Cog6ToothIcon, PlusIcon, UserIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
+import { IPodcastNavbar } from "@/types";
 
-interface PodcastNavbarItem {
-  subPath: string;
-  icon: React.ReactNode;
-  content: string;
-}
-
-const podcastNavbarItemList: PodcastNavbarItem[] = [
+const podcastNavbarItemList: IPodcastNavbar[] = [
   {
-    subPath: "",
+    subPath: "/info",
     icon: <UserIcon className="w-5 h-5 mr-3" />,
     content: "마이페이지",
   },
   {
-    subPath: "/episodes/create",
+    subPath: "/create-episode",
     icon: <PlusIcon className="w-5 h-5 mr-3" />,
     content: "에피소드 만들기",
   },

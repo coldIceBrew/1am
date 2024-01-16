@@ -24,7 +24,7 @@ export default function Podcasts() {
       {podcasts.length > 0 ? (
         podcasts.map((podcast) => (
           <div key={podcast.id}>
-            <Link href={`/podcasts/${podcast.id}`} prefetch={false}>
+            <Link href={`/podcasts/${podcast.id}/info`} prefetch={false}>
               {podcast.title}
             </Link>
           </div>
