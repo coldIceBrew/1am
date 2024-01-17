@@ -2,6 +2,7 @@ export interface IPodcastForm {
   producer: string;
   title: string;
   description: string;
+  file: File;
   category: string;
   subCategory: string;
   explicit: boolean;

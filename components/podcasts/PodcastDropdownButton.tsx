@@ -17,6 +17,8 @@ import { useRecoilValue } from "recoil";
 import { currentPodcastState } from "@/lib/atom";
 import { Skeleton } from "../ui/skeleton";
 
+import { IMAGE_PATH } from "@/lib/env";
+
 export default function PodcastDropdownButton() {
   const { podcast, state } = useRecoilValue(currentPodcastState);
 
@@ -38,8 +40,9 @@ export default function PodcastDropdownButton() {
         <div className="flex gap-x-3 rounded-lg border overflow-hidden dark:border-white]">
           <Image
             src={
-              podcast.artwork ||
-              "https://www.buzzsprout.com/images/artworks_cover.jpg"
+              podcast.artwork
+                ? `${IMAGE_PATH}/${podcast.artwork}`
+                : "https://www.buzzsprout.com/images/artworks_cover.jpg"
             }
             alt="podcast artwork"
             width={54}

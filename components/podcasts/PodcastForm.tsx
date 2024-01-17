@@ -5,11 +5,15 @@ import { Checkbox } from "../ui/checkbox";
 import { useForm } from "react-hook-form";
 import { useToast } from "../ui/use-toast";
 import { IPodcastForm } from "@/types";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { IMAGE_PATH } from "@/lib/env";
+import { useRouter } from "next/navigation";
 
 function PodcastForm({ podcast }: { podcast: Podcast }) {
   // TODO: 카테고리 추가
-  // TODO: 사진 업로드 추가
-  const { register, handleSubmit } = useForm<IPodcastForm>({
+
+  const { register, handleSubmit, setValue } = useForm<IPodcastForm>({
     defaultValues: {
       producer: podcast.producer,
       title: podcast.title,
@@ -20,11 +24,23 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
     },
   });
   const { toast } = useToast();
+  const router = useRouter();
+
+  const artworkInputRef = useRef<HTMLInputElement>(null);
+  const [srcState, setSrcState] = useState(
+    podcast.artwork ? `${IMAGE_PATH}/${podcast.artwork}` : ""
+  );
 
   const onSubmit = async (data: IPodcastForm) => {
+    const { file, ...rest } = data;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("json", JSON.stringify(rest));
+
     const res = await fetch(`/api/podcasts/${podcast.id}`, {
       method: "PATCH",
-      body: JSON.stringify(data),
+      body: formData,
     });
 
     if (res.ok) {
@@ -33,6 +49,8 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
         description: "팟캐스트 정보가 변경되었습니다.",
         variant: "success",
       });
+
+      // TODO: 새로고침 없이 변경된 정보만 업데이트
     } else {
       toast({
         title: "저장에 실패했습니다.",
@@ -42,28 +60,62 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
     }
   };
 
+  const uploadImage = () => {
+    if (artworkInputRef.current) {
+      artworkInputRef.current.click();
+    }
+  };
+
+  const onImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!isImageFile(file)) {
+      return;
+    }
+
+    setSrcState(URL.createObjectURL(file));
+
+    setValue("file", file);
+  };
+
+  const isImageFile = (file: File) => {
+    return file.type.match("image/.*");
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6">
         <p className="text-xl font-medium inline-block mb-2">아트워크</p>
         <div className="flex gap-x-6">
-          <img
-            className="w-32 h-32 border rounded-lg"
-            src={podcast.artwork || ""}
+          <Image
+            className="border rounded-lg"
+            width={250}
+            height={250}
+            src={srcState}
             alt="Podcast Artwork"
           />
           <div className="flex flex-col gap-y-2">
             <div className="flex-1"></div>
             <span className="text-gray-400">
-              1,400 ~ 3,000 픽셀의 정사각형 사진을 첨부해주세요. (jpg, png)
+              1,400 ~ 3,000 픽셀의 정사각형 사진을 첨부해주세요.
             </span>
             <div className="flex gap-x-3">
-              <Button asChild>
-                <div className="flex items-center justify-center">
-                  <PlusIcon className="w-5 h-5 mr-1.5" />
-                  <span>사진 선택</span>
-                </div>
-              </Button>
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={artworkInputRef}
+                  onChange={onImageUpload}
+                  hidden
+                />
+                <Button asChild onClick={uploadImage}>
+                  <div className="flex items-center justify-center">
+                    <PlusIcon className="w-5 h-5 mr-1.5" />
+                    <span>사진 선택</span>
+                  </div>
+                </Button>
+              </div>
               <Button asChild variant="secondary">
                 <div className="flex items-center justify-center">
                   <XMarkIcon className="w-5 h-5 mr-1.5" />
@@ -76,13 +128,13 @@ function PodcastForm({ podcast }: { podcast: Podcast }) {
       </div>
       <div className="mb-6">
         <label
-          htmlFor="producer"
+          htmlFor="podcast-producer"
           className="text-xl font-medium inline-block mb-2"
         >
           제작자명
         </label>
         <input
-          id="producer"
+          id="podcast-producer"
           className="border w-full p-2.5 text-sm"
           placeholder="ex) 빠삐용"
           {...register("producer", { required: true })}

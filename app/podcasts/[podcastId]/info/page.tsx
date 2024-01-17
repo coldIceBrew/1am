@@ -9,7 +9,6 @@ export default function PodcastsInfo() {
   const { podcast, state } = useRecoilValue(currentPodcastState);
 
   if (state === "null" || state === "loading") {
-    // TODO: 로딩 화면 만들기
     return <Loading />;
   }
 
